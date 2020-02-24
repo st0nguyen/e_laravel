@@ -43,7 +43,22 @@
             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td>{{ $order->customer_name }}</td>
             <td>{{ $order->order_total }}</td>
-            <td>{{ $order->order_status }}</td>
+{{--            <td>{{ $order->order_status }}</td>--}}
+              <td><span class="text-ellipsis">
+              <?php
+                      if($order->order_status == 0){
+                      ?>
+                <a href="{{URL::to('/processing-order/'.$order->order_id)}}"><span
+                        class="fa-thumb-styling fa fa-thumbs-up" title="đã được xử lý"></span></a>
+                <?php
+                      }else{
+                      ?>
+                 <a href="{{URL::to('/processed-order/'.$order->order_id)}}"><span
+                         class="fa-thumb-styling fa fa-thumbs-down" title="đang được xử lý"></span></a>
+                <?php
+                      }
+                      ?>
+            </span></td>
 
             <td>
               <a href="{{URL::to('/view-order/'.$order->order_id)}}" class="active styling-edit" ui-toggle-class="">

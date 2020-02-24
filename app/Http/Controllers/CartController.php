@@ -12,6 +12,22 @@ use Cart;
 session_start();
 class CartController extends Controller
 {
+    public function add_cart($productId){
+
+        $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
+
+
+        $data['id'] = $product_info->product_id;
+        $data['qty'] = 1;
+        $data['name'] = $product_info->product_name;
+        $data['price'] = $product_info->product_price;
+        $data['weight'] = $product_info->product_price;
+        $data['options']['image'] = $product_info->product_image;
+        Cart::add($data);
+        // Cart::destroy();
+       return back()->with('thông báo','đã mua hàng'.$product_info->product_name.' thành công');
+}
+
     public function save_cart(Request $request){
     	$productId = $request->productid_hidden;
     	$quantity = $request->qty;

@@ -66,7 +66,7 @@
         <thead>
           <tr>
 
-            <th>Tên người vận chuyển</th>
+            <th>Tên người nhận</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
 

@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="{{URL::to('/')}}"><img src="{{asset('/frontend/images/home/logo.png')}}" alt=""/></a>
+                        <a href="{{URL::to('/')}}"><img src="{{asset('/frontend/images/home/logo.png')}}" alt="" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         {{--                        <div class="btn-group">--}}
@@ -92,31 +92,27 @@
                             <?php
                             $customer_id = Session::get('customer_id');
                             $shipping_id = Session::get('shipping_id');
-                            if($customer_id != NULL && $shipping_id == NULL){
+                            if($customer_id!=NULL && $shipping_id==NULL){
                             ?>
                             <li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
 
                             <?php
-                            }elseif($customer_id != NULL && $shipping_id != NULL){
+                            }elseif($customer_id!=NULL && $shipping_id!=NULL){
                             ?>
                             <li><a href="{{URL::to('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
                             <?php
                             }else{
                             ?>
-                            <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a>
-                            </li>
+                            <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
                             <?php
                             }
                             ?>
 
 
-                            <li><a href="{{URL::to('/show-cart')}}">
-                                    <i class="fa fa-shopping-cart" title="Bạn đã mua {{Cart::count()}} mặt hàng"></i>
-                                    Giỏ hàng( {{Cart::count()}} )</a>
-                            </li>
+                            <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
                             <?php
                             $customer_id = Session::get('customer_id');
-                            if($customer_id != NULL){
+                            if($customer_id!=NULL){
                             ?>
                             <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
 
@@ -140,8 +136,7 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -170,8 +165,7 @@
                         {{csrf_field()}}
                         <div class="search_box pull-right">
                             <input type="text" name="keywords_submit" placeholder="Tìm kiếm sản phẩm"/>
-                            <input type="submit" style="margin-top:0;color:#666" name="search_items"
-                                   class="btn btn-primary btn-sm" value="Tìm kiếm">
+                            <input type="submit" style="margin-top:0;color:#666" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
                         </div>
                     </form>
                 </div>
@@ -200,19 +194,18 @@
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{asset('/frontend/images/g8.jpg')}}" class="girl img-responsive" alt=""/>
+                                <img src="{{asset('/frontend/images/g8.jpg')}}" class="girl img-responsive" alt="" />
                             </div>
                         </div>
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
                                 <h2>Chất lượng & đảm bảo</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{asset('/frontend/images/g9.png')}}" class="girl img-responsive" alt=""/>
+                                <img src="{{asset('/frontend/images/g9.png')}}" class="girl img-responsive" alt="" />
                             </div>
                         </div>
 
@@ -220,12 +213,11 @@
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
                                 <h2>Nhanh chóng & tiện nghi</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{asset('/frontend/images/g10.jpg')}}" class="girl img-responsive" alt=""/>
+                                <img src="{{asset('/frontend/images/g10.jpg')}}" class="girl img-responsive" alt="" />
                             </div>
                         </div>
 
@@ -244,49 +236,72 @@
     </div>
 </section><!--/slider-->
 
-<section>
-    <div class="container">
+<div id="contact-page" class="container">
+    <div class="bg">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>Danh mục sản phẩm</h2>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        @foreach($category as $key => $cate)
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a
-                                            href="{{URL::to('/danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div><!--/category-products-->
-
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Thương hiệu sản phẩm</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                @foreach($brand as $key => $brand)
-                                    <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand->brand_slug)}}"> <span
-                                                class="pull-right"></span>{{$brand->brand_name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
-
-
+            <div class="col-sm-12">
+                <h2 class="title text-center">Contact <strong>Us</strong></h2>
+                <div id="gmap" class="contact-map">
                 </div>
             </div>
-
-            <div class="col-sm-9 padding-right">
-
-                @yield('content')
-
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="contact-form">
+                    <h2 class="title text-center">Get In Touch</h2>
+                    <div class="status alert alert-success" style="display: none"></div>
+                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+                        <div class="form-group col-md-6">
+                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="email" name="email" class="form-control" required="required" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="text" name="subject" class="form-control" required="required" placeholder="Subject">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your Message Here"></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="submit" name="submit" class="btn btn-primary pull-right" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="contact-info">
+                    <h2 class="title text-center">Contact Info</h2>
+                    <address>
+                        <p>E-Shopper Inc.</p>
+                        <p>935 W. Webster Ave New Streets Chicago, IL 60614, NY</p>
+                        <p>Newyork USA</p>
+                        <p>Mobile: +2346 17 38 93</p>
+                        <p>Fax: 1-714-252-0026</p>
+                        <p>Email: info@e-shopper.com</p>
+                    </address>
+                    <div class="social-networks">
+                        <h2 class="title text-center">Social Networking</h2>
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-youtube"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div><!--/#contact-page-->
 
 <footer id="footer"><!--Footer-->
     <div class="footer-top">
@@ -298,64 +313,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                     </div>
                 </div>
-                {{--                <div class="col-sm-7">--}}
-                {{--                    <div class="col-sm-3">--}}
-                {{--                        <div class="video-gallery text-center">--}}
 
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-
-                {{--                    <div class="col-sm-3">--}}
-                {{--                        <div class="video-gallery text-center">--}}
-                {{--                            <a href="#">--}}
-                {{--                                <div class="iframe-img">--}}
-                {{--                                    <img src="{{asset('/frontend/images/iframe2.png')}}" alt="" />--}}
-                {{--                                </div>--}}
-                {{--                                <div class="overlay-icon">--}}
-                {{--                                    <i class="fa fa-play-circle-o"></i>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <p>Circle of Hands</p>--}}
-                {{--                            <h2>24 DEC 2014</h2>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-
-                {{--                    <div class="col-sm-3">--}}
-                {{--                        <div class="video-gallery text-center">--}}
-                {{--                            <a href="#">--}}
-                {{--                                <div class="iframe-img">--}}
-                {{--                                    <img src="{{asset('/frontend/images/iframe3.png')}}" alt="" />--}}
-                {{--                                </div>--}}
-                {{--                                <div class="overlay-icon">--}}
-                {{--                                    <i class="fa fa-play-circle-o"></i>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <p>Circle of Hands</p>--}}
-                {{--                            <h2>24 DEC 2014</h2>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-
-                {{--                    <div class="col-sm-3">--}}
-                {{--                        <div class="video-gallery text-center">--}}
-                {{--                            <a href="#">--}}
-                {{--                                <div class="iframe-img">--}}
-                {{--                                    <img src="{{asset('/frontend/images/iframe4.png')}}" alt="" />--}}
-                {{--                                </div>--}}
-                {{--                                <div class="overlay-icon">--}}
-                {{--                                    <i class="fa fa-play-circle-o"></i>--}}
-                {{--                                </div>--}}
-                {{--                            </a>--}}
-                {{--                            <p>Circle of Hands</p>--}}
-                {{--                            <h2>24 DEC 2014</h2>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--                <div class="col-sm-3">--}}
-                {{--                    <div class="address">--}}
-                {{--                        <img src="images/home/map.png" alt="" />--}}
-                {{--                        <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
             </div>
         </div>
     </div>
@@ -415,10 +373,9 @@
                     <div class="single-widget">
                         <h2>About Shopper</h2>
                         <form action="#" class="searchform">
-                            <input type="text" placeholder="Your email address"/>
-                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i>
-                            </button>
-                            <p>Get the most recent updates from <br/>our site and be updated your self...</p>
+                            <input type="text" placeholder="Your email address" />
+                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                            <p>Get the most recent updates from <br />our site and be updated your self...</p>
                         </form>
                     </div>
                 </div>
@@ -431,13 +388,13 @@
         <div class="container">
             <div class="row">
                 <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank"
-                                                           href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
             </div>
         </div>
     </div>
 
 </footer><!--/Footer-->
+
 
 
 <script src="{{asset('/frontend/js/jquery.js')}}"></script>

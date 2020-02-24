@@ -39,9 +39,9 @@ class CheckoutController extends Controller
     public function login_checkout(){
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $order_product = DB::table('tbl_order')->where('order_status','0')->orderby('order_id','desc')->get();
 
-        return view('pages.checkout.login_checkout')->with('category',$cate_product)->with('brand',$brand_product);
+        return view('pages.checkout.login_checkout')->with('category',$cate_product)->with('order',$order_product);
     }
     public function add_customer(Request $request){
 
@@ -61,9 +61,9 @@ class CheckoutController extends Controller
     }
     public function checkout(){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $order_product = DB::table('tbl_order')->where('order_status','0')->orderby('order_id','desc')->get();
 
-        return view('pages.checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product);
+        return view('pages.checkout.show_checkout')->with('category',$cate_product)->with('order',$order_product);
     }
     public function save_checkout_customer(Request $request){
         $data = array();
@@ -82,8 +82,8 @@ class CheckoutController extends Controller
     public function payment(){
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.checkout.payment')->with('category',$cate_product)->with('brand',$brand_product);
+        $order_product = DB::table('tbl_order')->where('order_status','0')->orderby('order_id','desc')->get();
+        return view('pages.checkout.payment')->with('category',$cate_product)->with('order',$order_product);
 
     }
     public function order_place(Request $request){
@@ -121,8 +121,8 @@ class CheckoutController extends Controller
             Cart::destroy();
 
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-            $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-            return view('pages.checkout.handcash')->with('category',$cate_product)->with('brand',$brand_product);
+            $order_product = DB::table('tbl_order')->where('order_status','0')->orderby('order_id','desc')->get();
+            return view('pages.checkout.handcash')->with('category',$cate_product)->with('order',$order_product);
 
         }else{
             echo 'Thẻ ghi nợ';
@@ -161,5 +161,29 @@ class CheckoutController extends Controller
             ->orderby('tbl_order.order_id','desc')->get();
         $manager_order  = view('admin.manage_order')->with('all_order',$all_order);
         return view('admin_layout')->with('admin.manage_order', $manager_order);
+    }
+
+    public function delete_order($order_id){
+        $this->AuthLogin();
+        DB::table('tbl_order')
+            ->join('tbl_customers','tbl_order.customer_id','=','tbl_customers.customer_id')
+            ->where('order_id',$order_id)->delete();
+        Session::put('message','Xóa sản phẩm thành công');
+        return Redirect::to('manage-order');
+}
+    public function processed_order($order_id)
+    {
+        $this->AuthLogin();
+        DB::table('tbl_order')->where('order_id',$order_id)->update(['order_status'=>0]);
+        Session::put('message','đơn hàng đã được xử lý');
+        return Redirect::to('manage-order');
+    }
+
+    public function processing_order($order_id)
+    {
+        $this->AuthLogin();
+        DB::table('tbl_order')->where('order_id',$order_id)->update(['order_status'=>1]);
+        Session::put('message','đơn hàng đang được xử lý');
+        return Redirect::to('manage-order');
     }
 }

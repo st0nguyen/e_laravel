@@ -14,6 +14,7 @@
 Route::get('/','HomeController@index' );
 Route::get('/trang-chu','HomeController@index');
 Route::post('/tim-kiem','HomeController@search');
+Route::get('/contact-us','HomeController@getContact');
 
 //Danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{slug_category_product}','CategoryProduct@show_category_home');
@@ -69,6 +70,7 @@ Route::post('/update-cart-quantity','CartController@update_cart_quantity');
 Route::post('/save-cart','CartController@save_cart');
 Route::get('/show-cart','CartController@show_cart');
 Route::get('/delete-to-cart/{rowId}','CartController@delete_to_cart');
+Route::get('/add-cart/{id}','CartController@add_cart');
 
 //Checkout
 
@@ -83,4 +85,11 @@ Route::post('/save-checkout-customer','CheckoutController@save_checkout_customer
 
 //Order
 Route::get('/manage-order','CheckoutController@manage_order');
-Route::get('/view-order/{orderId}','CheckoutController@view_order');
+Route::get('/view-order/{order_id}','CheckoutController@view_order');
+Route::get('/delete-order/{order_id}','CheckoutController@delete_order');
+Route::get('/processing-order/{order_id}','CheckoutController@processing_order');
+Route::get('/processed-order/{order_id}','CheckoutController@processed_order');
+
+//Captcha
+Route::get('captcha-form', 'CaptchaController@captchaForm');
+Route::post('store-captcha-form', 'CaptchaController@storeCaptchaForm');
